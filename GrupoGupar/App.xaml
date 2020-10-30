@@ -1,0 +1,14 @@
+﻿<Application x:Class="GrupoGupar.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:GrupoGupar"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+
+        <BitmapImage x:Key="Productos" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="pack://siteoforigin:,,,/Resources/productos.png"/>
+        <BitmapImage x:Key="Entradas" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="pack://siteoforigin:,,,/Resources/entrada.jpg"/>
+        <BitmapImage x:Key="Salidas" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="pack://siteoforigin:,,,/Resources/salida.png"/>
+        <BitmapImage x:Key="Clientes" CreateOptions="IgnoreImageCache" CacheOption="OnLoad" UriSource="pack://siteoforigin:,,,/Resources/clientes.png"/>
+
+    </Application.Resources>
+</Application>
