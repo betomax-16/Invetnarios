@@ -5,48 +5,39 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GrupoGupar.Views"
         mc:Ignorable="d"
-        Title="CRUDProducto" Height="405" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="CRUDProducto" Height="334.968" Width="800" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <ScrollViewer>
         <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="57"/>
-                <RowDefinition Height="259"/>
-                <RowDefinition Height="103*"/>
+                <RowDefinition Height="205"/>
+                <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
-                    <ColumnDefinition/>
-                </Grid.ColumnDefinitions>
-                <Label x:Name="label" Content="Código" HorizontalAlignment="Left" Margin="17,6,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox" Height="23" Margin="17,32,202,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy" Content="Entradas" HorizontalAlignment="Left" Margin="17,121,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox_Copy" Height="23" Margin="17,147,202,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy1" Content="Salidas" HorizontalAlignment="Left" Margin="199,121,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox_Copy1" Height="23" Margin="199,147,20,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy2" Content="Stock" HorizontalAlignment="Left" Margin="17,183,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox_Copy2" Height="23" Margin="17,209,202,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy3" Content="Precio compra Almacen 1" HorizontalAlignment="Left" Margin="199,183,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox_Copy3" Height="23" Margin="199,209,20,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy9" Content="Descripcion" HorizontalAlignment="Left" Margin="17,62,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="textBox_Copy9" Height="23" Margin="17,88,20,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top"/>
-                <Label x:Name="label_Copy4" Content="Precio compra Almacen 2" HorizontalAlignment="Left" Margin="21,6,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox x:Name="textBox_Copy4" Height="23" Margin="21,32,197,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="label_Copy5" Content="Porcenaje venta" HorizontalAlignment="Left" Margin="208,6,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox x:Name="textBox_Copy5" Height="23" Margin="208,32,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="label_Copy6" Content="Precio venta Alamcen 1" HorizontalAlignment="Left" Margin="21,62,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox x:Name="textBox_Copy6" Height="23" Margin="21,88,198,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="label_Copy7" Content="Precio venta Alamcen 2" HorizontalAlignment="Left" Margin="208,62,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox x:Name="textBox_Copy7" Height="23" Margin="208,88,11,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="label_Copy8" Content="Ganancia" HorizontalAlignment="Left" Margin="22,121,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox x:Name="textBox_Copy8" Height="23" Margin="22,147,197,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Column="1"/>
-                <Label x:Name="label_Copy10" Content="Ubicacion" HorizontalAlignment="Left" Margin="22,183,0,0" VerticalAlignment="Top" Grid.Column="1"/>
-                <TextBox x:Name="textBox_Copy10" Height="23" Margin="22,209,10,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Grid.Column="1"/>
-
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="69*"/>
+                    <RowDefinition Height="190*"/>
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Label Grid.Column="0" x:Name="label" Content="Código" HorizontalAlignment="Left" Margin="20,6,0,0" VerticalAlignment="Top"/>
+                    <TextBox Grid.Column="0" x:Name="txtCodigo" Height="23" Margin="20,32,20,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                    <Label Grid.Column="1" x:Name="label_Copy3" Content="Categoria" HorizontalAlignment="Left" Margin="20,6,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbCategoria" Grid.Column="1" Margin="20,32,20,0" VerticalAlignment="Top" Height="23" 
+                              SelectedValuePath="id"
+                              DisplayMemberPath="nombre"/>
+                </Grid>
+                <Label Grid.Row="1" x:Name="label_Copy9" Content="Nombre" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top" Height="26" Width="54"/>
+                <TextBox Grid.Row="1" x:Name="txtNombre" Height="23" Margin="20,40,20,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <Label Grid.Row="1" x:Name="label_Copy" Content="Descripcion" HorizontalAlignment="Left" Margin="20,85,0,0" VerticalAlignment="Top" Height="26" Width="72"/>
+                <TextBox Grid.Row="1" x:Name="txtDescripcion" Height="23" Margin="20,115,20,0" TextWrapping="Wrap" VerticalAlignment="Top"/>
             </Grid>
-            <Label x:Name="label1" Content="Productos" HorizontalAlignment="Center" Margin="0" VerticalAlignment="Center" FontSize="30" FontWeight="Bold"/>
-            <Button x:Name="button" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="2" VerticalAlignment="Center" Width="172" Height="20"/>
-            <Button x:Name="button1" Content="Eliminar" HorizontalAlignment="Right" Margin="0,19,187,19" Grid.Row="2" VerticalAlignment="Center" Width="172" Height="20"/>
+            <Label x:Name="lbTitulo" Content="Productos" Margin="0,4,0,3" VerticalAlignment="Center" FontSize="30" FontWeight="Bold" Height="50" HorizontalAlignment="Center"/>
+            <Button x:Name="btnGuardar" Content="Guardar" HorizontalAlignment="Right" Margin="0,0,10,0" Grid.Row="2" VerticalAlignment="Center" Width="172" Height="20" Click="btnGuardar_Click"/>
+            <Button x:Name="btnEliminar" Content="Eliminar" HorizontalAlignment="Right" Margin="0,0,187,0" Grid.Row="2" VerticalAlignment="Center" Width="172" Height="20" Click="btnEliminar_Click"/>
         </Grid>
     </ScrollViewer>
 </Window>

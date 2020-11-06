@@ -1,0 +1,286 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="InventariosModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'Inventarios.dbo.Almacen_Productos' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="Almacen_Productos">
+          <Property Name="idAlmacen" Type="nvarchar" MaxLength="255" />
+          <Property Name="idProducto" Type="nvarchar" MaxLength="255" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="ubicacion" Type="nvarchar" MaxLength="255" />
+          <Property Name="precioVenta" Type="money" />
+        </EntityType>-->
+        <EntityType Name="Almacenes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="direccion" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errores durante la generación:
+advertencia 6013: La tabla o vista 'Inventarios.dbo.MovimientoDetalle' no tiene definida una clave principal y no es posible inferir ninguna clave principal válida. Esta tabla o vista se ha excluido. Para usar la entidad, necesitará revisar el esquema, agregar las claves correctas y quitar sus comentarios.
+        <EntityType Name="MovimientoDetalle">
+          <Property Name="idMovimiento" Type="nvarchar" MaxLength="255" />
+          <Property Name="idProducto" Type="nvarchar" MaxLength="255" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="precioUnitario" Type="money" />
+        </EntityType>-->
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="idTipoMovimiento" Type="nvarchar" MaxLength="255" />
+          <Property Name="idAlmacen" Type="nvarchar" MaxLength="255" />
+          <Property Name="fecha" Type="date" />
+          <Property Name="monto" Type="money" />
+          <Property Name="cantidad" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="255" />
+          <Property Name="descripcion" Type="nvarchar" MaxLength="255" />
+          <Property Name="idCategoria" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="TiposMovimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="nombre" Type="nvarchar" MaxLength="255" />
+        </EntityType>
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'Inventarios.dbo.Almacen_Productos', pero no se encuentra la tabla.
+        <Association Name="FK_Almacen_Productos_Almacenes" />-->
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'Inventarios.dbo.Almacen_Productos', pero no se encuentra la tabla.
+        <Association Name="FK_Almacen_Productos_Productos" />-->
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'Inventarios.dbo.MovimientoDetalle', pero no se encuentra la tabla.
+        <Association Name="FK_MovimientoDetalle_Movimientos" />-->
+        <!--Errores durante la generación:
+error 6004: Una relación hace referencia a la tabla 'Inventarios.dbo.MovimientoDetalle', pero no se encuentra la tabla.
+        <Association Name="FK_MovimientoDetalle_Productos" />-->
+        <Association Name="FK_Movimientos_TiposMovimiento">
+          <End Role="TiposMovimiento" Type="Self.TiposMovimiento" Multiplicity="0..1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposMovimiento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="idTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventariosModelStoreContainer">
+          <EntitySet Name="Almacenes" EntityType="Self.Almacenes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TiposMovimiento" EntityType="Self.TiposMovimiento" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Movimientos_TiposMovimiento" Association="Self.FK_Movimientos_TiposMovimiento">
+            <End Role="TiposMovimiento" EntitySet="TiposMovimiento" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventariosModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Almacenes">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="direccion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Categorias">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Movimientos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="idTipoMovimiento" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idAlmacen" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="fecha" Type="DateTime" Precision="0" />
+          <Property Name="monto" Type="Decimal" Precision="19" Scale="4" />
+          <Property Name="cantidad" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="TiposMovimiento" Relationship="Self.FK_Movimientos_TiposMovimiento" FromRole="Movimientos" ToRole="TiposMovimiento" />
+        </EntityType>
+        <EntityType Name="Productos">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="descripcion" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="idCategoria" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="TiposMovimiento">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="nombre" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Movimientos" Relationship="Self.FK_Movimientos_TiposMovimiento" FromRole="TiposMovimiento" ToRole="Movimientos" />
+        </EntityType>
+        <Association Name="FK_Movimientos_TiposMovimiento">
+          <End Role="TiposMovimiento" Type="Self.TiposMovimiento" Multiplicity="0..1" />
+          <End Role="Movimientos" Type="Self.Movimientos" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TiposMovimiento">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="Movimientos">
+              <PropertyRef Name="idTipoMovimiento" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="InventariosEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Almacenes" EntityType="Self.Almacenes" />
+          <EntitySet Name="Categorias" EntityType="Self.Categorias" />
+          <EntitySet Name="Movimientos" EntityType="Self.Movimientos" />
+          <EntitySet Name="Productos" EntityType="Self.Productos" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="TiposMovimiento" EntityType="Self.TiposMovimiento" />
+          <AssociationSet Name="FK_Movimientos_TiposMovimiento" Association="Self.FK_Movimientos_TiposMovimiento">
+            <End Role="TiposMovimiento" EntitySet="TiposMovimiento" />
+            <End Role="Movimientos" EntitySet="Movimientos" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventariosModelStoreContainer" CdmEntityContainer="InventariosEntities">
+          <EntitySetMapping Name="Almacenes">
+            <EntityTypeMapping TypeName="InventariosModel.Almacenes">
+              <MappingFragment StoreEntitySet="Almacenes">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="direccion" ColumnName="direccion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categorias">
+            <EntityTypeMapping TypeName="InventariosModel.Categorias">
+              <MappingFragment StoreEntitySet="Categorias">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Movimientos">
+            <EntityTypeMapping TypeName="InventariosModel.Movimientos">
+              <MappingFragment StoreEntitySet="Movimientos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="idTipoMovimiento" ColumnName="idTipoMovimiento" />
+                <ScalarProperty Name="idAlmacen" ColumnName="idAlmacen" />
+                <ScalarProperty Name="fecha" ColumnName="fecha" />
+                <ScalarProperty Name="monto" ColumnName="monto" />
+                <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Productos">
+            <EntityTypeMapping TypeName="InventariosModel.Productos">
+              <MappingFragment StoreEntitySet="Productos">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="idCategoria" ColumnName="idCategoria" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="InventariosModel.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TiposMovimiento">
+            <EntityTypeMapping TypeName="InventariosModel.TiposMovimiento">
+              <MappingFragment StoreEntitySet="TiposMovimiento">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="nombre" ColumnName="nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

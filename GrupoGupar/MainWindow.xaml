@@ -7,7 +7,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GrupoGupar"
         mc:Ignorable="d"
-        Title="GrupoGupar" Height="450" Width="800">
+        Title="GrupoGupar" Height="450" Width="800" WindowState="Maximized">
     <DockPanel>
         <Ribbon x:Name="RibbonBar" DockPanel.Dock="Top" IsTabStop="False">
             <Ribbon.ApplicationMenu>
